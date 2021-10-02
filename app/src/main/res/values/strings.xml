@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">weightTracker</string>
+    <string name="quick_add_meal">Quick add meal</string>
+    <string name="create_meal">Create meal</string>
+    <string name="add_food_item">Add food item</string>
+    <string name="brand_type">Brand/Type</string>
+    <string name="units">Units</string>
+    <string name="grams">grams</string>
+    <string name="millilitres">millilitres</string>
+    <string name="per_100g">Per 100g</string>
+    <string name="kj">Kj</string>
+    <string name="per_100_units">Per 100 units</string>
+    <string name="name">Name</string>
+    <string name="enter">Enter</string>
+    <string name="serving_size">Serving size</string>
+</resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/quickAddButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/quick_add_meal"
+        android:onClick="quickAddButtonOnclick"
+        />
+
+    <Button
+        android:id="@+id/createMeal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="createMealButtonOnclick"
+        android:text="@string/create_meal" />
+
+    <Button
+        android:id="@+id/addFood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="addFoodButtonOnclick"
+        android:text="@string/add_food_item" />
+</LinearLayout>
