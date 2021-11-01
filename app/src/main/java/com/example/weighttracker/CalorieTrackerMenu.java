@@ -21,6 +21,8 @@ public class CalorieTrackerMenu extends AppCompatActivity {
     }
 
     public void createMealButtonOnclick(View view) {
+        Intent intent = new Intent(this, CreateMealActivity.class);
+        startActivity(intent);
     }
 
     public void quickAddButtonOnclick(View view) {

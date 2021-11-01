@@ -100,8 +100,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         String createFoodTypeTableString = "" +
                 "CREATE TABLE " + FOOD_TYPE_TABLE + "(" +
-                FOOD_TYPE_NAME + " varchar(20) NOT NULL PRIMARY KEY, " +
-                FOOD_TYPE_BRAND + " varchar(20) NOT NULL PRIMARY KEY, " +
+                FOOD_TYPE_NAME + " varchar(20) NOT NULL, " +
+                FOOD_TYPE_BRAND + " varchar(20) NOT NULL, " +
                 FOOD_TYPE_UNITS + " CHAR(5), " +
                 FOOD_TYPE_KJ + " int, " +
                 FOOD_TYPE_CARBS + " int, " +
@@ -109,7 +109,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 FOOD_TYPE_PROTEIN + " int, " +
                 FOOD_TYPE_FAT + " int, " +
                 FOOD_TYPE_SERVING_SIZE + " int, " +
-                FOOD_TYPE_SERVING_LABEL + " varchar(20) " +
+                FOOD_TYPE_SERVING_LABEL + " varchar(20) ," +
+                "PRIMARY KEY ("+ FOOD_TYPE_NAME + ", " + FOOD_TYPE_BRAND + ")" +
                 ");";
 
         String createWeightTableString = "" +
