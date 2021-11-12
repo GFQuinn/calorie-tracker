@@ -6,35 +6,38 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
-public class CreateFoodRecyclerViewAdapter extends RecyclerView.Adapter<CreateFoodRecyclerViewAdapter.ViewHolder> {
+public class FoodTypeRecyclerViewAdapter extends RecyclerView.Adapter<FoodTypeRecyclerViewAdapter.ViewHolder> {
 
-    private List<String> mData;
+    private FoodTypes mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
+    private int selectedPos = RecyclerView.NO_POSITION;
 
     // data is passed into the constructor
-    CreateFoodRecyclerViewAdapter(Context context, List<String> data) {
+    FoodTypeRecyclerViewAdapter(Context context, FoodTypes data) {
         this.mInflater = LayoutInflater.from(context);
+        setHasStableIds(false);
         this.mData = data;
     }
 
     // inflates the row layout from xml when needed
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.recyclerview_row, parent, false);
+    public ViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
+        View view = mInflater.inflate(R.layout.foodtype_recyclerview_row, parent, false);
         return new ViewHolder(view);
     }
 
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String foodItem = mData.get(position);
-        holder.myTextView.setText(foodItem);
+        holder.itemView.setSelected(selectedPos == position);
+        String[] foodItem = mData.getNameAndBrand(position);
+        holder.nameTextView.setText(foodItem[0]);
+        holder.brandTextView.setText(foodItem[1]);
     }
 
     // total number of rows
@@ -46,23 +49,29 @@ public class CreateFoodRecyclerViewAdapter extends RecyclerView.Adapter<CreateFo
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView myTextView;
+        TextView nameTextView;
+        TextView brandTextView;
 
         ViewHolder(View itemView) {
             super(itemView);
-            myTextView = itemView.findViewById(R.id.foodItemRow);
+            nameTextView = itemView.findViewById(R.id.foodItemName);
+            brandTextView = itemView.findViewById(R.id.foodItemBrand);
+            itemView.setClickable(true);
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+            notifyItemChanged(selectedPos);
+            selectedPos = getLayoutPosition();
+            notifyItemChanged(selectedPos);
         }
     }
 
     // convenience method for getting data at click position
-    String getItem(int id) {
-        return mData.get(id);
+    String[] getItem(int id) {
+        return mData.getNameAndBrand(id);
     }
 
     // allows clicks events to be caught

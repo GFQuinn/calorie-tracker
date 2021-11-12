@@ -2,8 +2,10 @@ package com.example.weighttracker;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -40,7 +42,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final String RECIPE_NAME = "RECIPE_NAME";
     private static final String ISSAVED = "ISSAVED";
 
-    //Meal tabel
+    //Meal table
     private static final String MEALS_TABLE = "MEALS_TABLE";
     private static final String MEALS_DATE = "MEALS_DATE";
     private static final String MEALS_TIME = "MEALS_TIME";
@@ -110,7 +112,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 FOOD_TYPE_FAT + " int, " +
                 FOOD_TYPE_SERVING_SIZE + " int, " +
                 FOOD_TYPE_SERVING_LABEL + " varchar(20) ," +
-                "PRIMARY KEY ("+ FOOD_TYPE_NAME + ", " + FOOD_TYPE_BRAND + ")" +
+                "PRIMARY KEY (" + FOOD_TYPE_NAME + ", " + FOOD_TYPE_BRAND + ")" +
                 ");";
 
         String createWeightTableString = "" +
@@ -207,12 +209,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public ArrayList<String> getFoodList() {
-        ArrayList<String> foodList = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        //db.rawQuery("SELECT "+ FOOD_TYPE_NAME + ", " + FOOD_TYPE_BRAND +" FROM " + FOOD_TYPE_TABLE + ";");
-        return foodList;
+    public FoodTypes getAllFoodItems() {
+        SQLiteDatabase database = this.getWritableDatabase();
+        FoodTypes foodItems = new FoodTypes();
+        String query = "SELECT  *  from " + FOOD_TYPE_TABLE;
+
+        try (Cursor cursor = database.rawQuery(query, null)) {
+            while (cursor.moveToNext()) {
+                FoodType currentItem = new FoodType(cursor.getString(0),
+                        cursor.getString(1), cursor.getString(2),
+                        cursor.getInt(3), cursor.getFloat(4),
+                        cursor.getFloat(5), cursor.getFloat(6),
+                        cursor.getFloat(7), cursor.getInt(8),
+                        cursor.getString(9));
+
+                foodItems.add(currentItem);
+            }
+        }
+        return foodItems;
     }
+
 
     public void deleteDatabase(Context context) {
         context.deleteDatabase(DATABASE_NAME);

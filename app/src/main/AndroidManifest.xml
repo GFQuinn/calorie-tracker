@@ -9,12 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WeightTracker">
-        <activity android:name=".CreateMealActivity"></activity>
+        <activity android:name=".CreateMealActivity" />
         <activity android:name=".AddFood" />
         <activity android:name=".GraphActivity" />
         <activity android:name=".CalorieTrackerMenu" />
         <activity android:name=".WeightTracker" />
+        <activity android:name=".AddItemPopup"
+            android:theme="@style/PopupTheme"
+            />
         <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
