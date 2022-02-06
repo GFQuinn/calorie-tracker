@@ -6,7 +6,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class CalorieTrackerMenu extends AppCompatActivity {
+public class ActivityCalorieTrackerMenu extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -16,12 +16,12 @@ public class CalorieTrackerMenu extends AppCompatActivity {
     }
 
     public void addFoodButtonOnclick(View view) {
-        Intent intent = new Intent(this, AddFood.class);
+        Intent intent = new Intent(this, ActivityAddFood.class);
         startActivity(intent);
     }
 
     public void createMealButtonOnclick(View view) {
-        Intent intent = new Intent(this, CreateMealActivity.class);
+        Intent intent = new Intent(this, ActivityCreateMeal.class);
         startActivity(intent);
     }
 

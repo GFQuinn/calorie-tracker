@@ -6,20 +6,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
 
-public class RecipeRecyclerViewAdapter extends  RecyclerView.Adapter<RecipeRecyclerViewAdapter.RecipeViewHolder>{
+public class ViewAdapterRecipeRecycler extends  RecyclerView.Adapter<ViewAdapterRecipeRecycler.RecipeViewHolder>{
 
-    private Recipe mData;
+    private ClassRecipe mData;
     private LayoutInflater mInflater;
     private FoodTypeRecyclerViewAdapter.ItemClickListener mClickListener;
     private int selectedPos = RecyclerView.NO_POSITION;
 
     // data is passed into the constructor
-    RecipeRecyclerViewAdapter(Context context, Recipe data) {
+    ViewAdapterRecipeRecycler(Context context, ClassRecipe data) {
         this.mInflater = LayoutInflater.from(context);
         setHasStableIds(false);
         this.mData = data;
@@ -27,20 +26,30 @@ public class RecipeRecyclerViewAdapter extends  RecyclerView.Adapter<RecipeRecyc
 
     // inflates the row layout from xml when needed
     @Override
-    public RecipeRecyclerViewAdapter.RecipeViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
+    public ViewAdapterRecipeRecycler.RecipeViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.recipe_recyclerview_row, parent, false);
 
-        return new RecipeRecyclerViewAdapter.RecipeViewHolder(view);
+        return new ViewAdapterRecipeRecycler.RecipeViewHolder(view);
     }
 
     // binds the data to the TextView in each row
     @Override
-    public void onBindViewHolder(RecipeRecyclerViewAdapter.RecipeViewHolder holder, int position) {
+    public void onBindViewHolder(ViewAdapterRecipeRecycler.RecipeViewHolder holder, int position) {
         holder.itemView.setSelected(selectedPos == position);
-        String[] foodItem = mData.getIngredientDataAtIndex(position);
-        holder.nameTextView.setText(foodItem[0]);
-        holder.weightTextView.setText(foodItem[1]);
-        holder.energyTextView.setText(foodItem[2]);
+        ClassIngredient ingredient = mData.getIngredientDataAtIndex(position);
+
+        String units = ingredient.getUnits();
+       if (units.equals("grams"))
+       {
+           holder.weightTextView.setText(String.valueOf(ingredient.getAmount())+ "g");
+       }
+       else
+       {
+           holder.weightTextView.setText(String.valueOf(ingredient.getAmount())+ "mL");
+       }
+        holder.nameTextView.setText(ingredient.getFoodName());
+
+        holder.energyTextView.setText(String.valueOf(ingredient.getEnergy()) + "Kj");
     }
 
 
@@ -74,7 +83,7 @@ public class RecipeRecyclerViewAdapter extends  RecyclerView.Adapter<RecipeRecyc
         }
     }
     // convenience method for getting data at click position
-    String[] getItem(int id) {
+    ClassIngredient getItem(int id) {
         return mData.getIngredientDataAtIndex(id);
     }
 

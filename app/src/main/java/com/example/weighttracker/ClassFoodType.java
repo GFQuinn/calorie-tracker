@@ -3,28 +3,29 @@ package com.example.weighttracker;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class FoodType implements Parcelable {
-    private String brandName;
-    private String foodName;
-    private String units;
-    private int calories;
-    private float carbs;
-    private float sugars;
-    private float fat;
-    private float protein;
-    private int servingSize;
-    private String servingLabel;
+public class ClassFoodType implements Parcelable {
+    private final String brandName;
+    private final String foodName;
+    private final String units;
+    private final int calories;
+    private final float carbs;
 
-    FoodType(String foodName,
-            String brandName,
-            String units,
-            int calories,
-            float carbs,
-            float sugars,
-             float protein,
-            float fat,
-             int servingSize,
-             String servingLabel
+    private final float sugars;
+    private final float fat;
+    private final float protein;
+    private final int servingSize;
+    private final String servingLabel;
+
+    ClassFoodType(String foodName,
+                  String brandName,
+                  String units,
+                  int calories,
+                  float carbs,
+                  float sugars,
+                  float protein,
+                  float fat,
+                  int servingSize,
+                  String servingLabel
  ) {
         this.brandName = brandName;
         this.foodName = foodName;
@@ -38,7 +39,7 @@ public class FoodType implements Parcelable {
         this.servingLabel = servingLabel;
     }
 
-    protected FoodType(Parcel in) {
+    protected ClassFoodType(Parcel in) {
         brandName = in.readString();
         foodName = in.readString();
         units = in.readString();
@@ -51,15 +52,15 @@ public class FoodType implements Parcelable {
         servingLabel = in.readString();
     }
 
-    public static final Creator<FoodType> CREATOR = new Creator<FoodType>() {
+    public static final Creator<ClassFoodType> CREATOR = new Creator<ClassFoodType>() {
         @Override
-        public FoodType createFromParcel(Parcel in) {
-            return new FoodType(in);
+        public ClassFoodType createFromParcel(Parcel in) {
+            return new ClassFoodType(in);
         }
 
         @Override
-        public FoodType[] newArray(int size) {
-            return new FoodType[size];
+        public ClassFoodType[] newArray(int size) {
+            return new ClassFoodType[size];
         }
     };
 
@@ -103,5 +104,9 @@ public class FoodType implements Parcelable {
     {
         return calories;
     }
+
+    public int getServingSize() { return servingSize;}
+
+    public String getServingLabel() { return servingLabel;}
 }
 

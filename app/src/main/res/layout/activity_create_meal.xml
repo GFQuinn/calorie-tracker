@@ -1,30 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateMealActivity">
+    tools:context=".ActivityCreateMeal">
+
+
+    <LinearLayout
+        android:id="@+id/titles"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.33333333"
+            android:text="@string/name"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.33333333"
+            android:text="@string/amount"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/energyTextField"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.33333333"
+            android:text="@string/energy"
+            android:textSize="25sp"
+
+            />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/AddfoodItemList"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_weight="20"
+        app:layout_constraintTop_toBottomOf="@id/titles" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="10">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/AddfoodItemList">
 
-      <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/AddfoodItemList"
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.33333333"
+            android:text="@string/total"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/totalAmountTextField"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.33333333"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/totalEnergyTextField"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.33333333"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/save_linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_buttons"
+        android:gravity="center_horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/record_as_a_meal"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/save_checkbox" />
+
+        <CheckBox
+            android:id="@+id/record_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save_as_a_quick_meal"
+            android:textSize="18sp"/>
+
+        <CheckBox
+            android:id="@+id/save_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/bottom_buttons"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-          android:layout_weight="9"/>
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/saveMealButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:layout_weight="1"
+            android:onClick="saveMealOnclick"
+            android:text="@string/save_meal" />
 
         <Button
             android:id="@+id/addItemPopupButton"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:textAlignment="center"
-            android:text="@string/add_food_item_to_meal"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:onClick="addItemPopupOnclick"
-            android:layout_weight="1"/>
+            android:text="@string/add_food_item_to_meal" />
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

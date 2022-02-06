@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/user_profile_settings"
+        android:id="@+id/user_profile_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:textSize="20sp">
+
+    </TextView>
+
+    <LinearLayout
+        android:id="@+id/energy_selection_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/user_profile_title"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/energy_units"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            >
+
+        </TextView>
+
+        <RadioGroup
+            android:id="@+id/energy_radio_button_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="2"
+            >
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kilojoules"
+                >
+            </RadioButton>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/calories">
+            </RadioButton>
+
+        </RadioGroup>
+
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/title"
+        app:layout_constraintTop_toBottomOf="@+id/energy_selection_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/username" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:enabled="false"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/target_weight_linear"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/target_weight_goal" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_0"
+            android:inputType="number"
+            android:enabled="false"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/mon_energy_linear"
+        app:layout_constraintTop_toBottomOf="@+id/target_weight_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/monday_energy_goal" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/_0"
+            android:inputType="number"
+            android:enabled="false"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tues_energy_linear"
+        app:layout_constraintTop_toBottomOf="@+id/mon_energy_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tuesday_energy_goal" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/_0"
+            android:inputType="number"
+            android:enabled="false"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/wed_energy_linear"
+        app:layout_constraintTop_toBottomOf="@+id/tues_energy_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/wednesday_energy_goal" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/_0"
+            android:inputType="number"
+            android:enabled="false"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/thu_energy_linear"
+        app:layout_constraintTop_toBottomOf="@+id/wed_energy_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/thursday_energy_goal" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/_0"
+            android:inputType="number"
+            android:enabled="false"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/fri_energy_linear"
+        app:layout_constraintTop_toBottomOf="@+id/thu_energy_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/friday_energy_goal" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/_0"
+            android:inputType="number"
+            android:enabled="false"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/sat_energy_linear"
+        app:layout_constraintTop_toBottomOf="@+id/fri_energy_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/saturday_energy_goal" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/_0"
+            android:inputType="number"
+            android:enabled="false"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/sun_energy_linear"
+        app:layout_constraintTop_toBottomOf="@+id/sat_energy_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sunday_energy_goal" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/_0"
+            android:inputType="number"
+            android:enabled="false"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/daily_carbs_linear"
+        app:layout_constraintTop_toBottomOf="@+id/sun_energy_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/carbohydrate_raito" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/_0"
+            android:inputType="number"
+            android:enabled="false"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/daily_fat_linear"
+        app:layout_constraintTop_toBottomOf="@+id/daily_carbs_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fat_ratio" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/_0"
+            android:inputType="number"
+            android:enabled="false"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/daily_protein_linear"
+        app:layout_constraintTop_toBottomOf="@+id/daily_fat_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/protein_ratio" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/_0"
+            android:inputType="number"
+            android:enabled="false"
+            />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

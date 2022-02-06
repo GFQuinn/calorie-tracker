@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AddFood">
+    tools:context=".ActivityAddFood"
+    tools:ignore="ExtraText">
 
     #food item name input
     <LinearLayout
@@ -81,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/millilitres"
-                android:onClick="millilitesRadioOnClick"/>
+                android:onClick="millilitresRadioOnClick"/>
         </RadioGroup>
     </LinearLayout>
     #per 100g title textview
@@ -160,11 +161,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="Carbohydrates"
+            android:text="@string/carbohydrates"
             android:textAlignment="center"/>
         <EditText
             android:inputType="numberDecimal"
             android:id="@+id/carbsEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="4"
+            android:layout_weight="0.5"/>
+    </LinearLayout>
+
+    #suagrs edit text
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="@string/sugar"
+            android:textAlignment="center"/>
+        <EditText
+            android:inputType="numberDecimal"
+            android:id="@+id/sugarEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLength="4"
@@ -190,14 +211,32 @@
             android:id="@+id/servingSizeEditNumber" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="@string/serving_label"
+            android:textAlignment="center"/>
+        <EditText
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:maxLength="20"
+            android:id="@+id/servingLabelEditText"/>
+    </LinearLayout>
+
     <Button
         android:id="@+id/addFoodItemButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:text="@string/enter"
-        android:onClick="addFoodItemOnClick"
-        ></Button>
+        android:onClick="addFoodItemOnClick" />
 
 
 </LinearLayout>

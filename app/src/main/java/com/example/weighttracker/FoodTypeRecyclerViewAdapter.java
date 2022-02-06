@@ -12,13 +12,13 @@ import org.jetbrains.annotations.NotNull;
 
 public class FoodTypeRecyclerViewAdapter extends RecyclerView.Adapter<FoodTypeRecyclerViewAdapter.ViewHolder> {
 
-    private FoodTypes mData;
+    private ClassFoodTypes mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
     private int selectedPos = RecyclerView.NO_POSITION;
 
     // data is passed into the constructor
-    FoodTypeRecyclerViewAdapter(Context context, FoodTypes data) {
+    FoodTypeRecyclerViewAdapter(Context context, ClassFoodTypes data) {
         this.mInflater = LayoutInflater.from(context);
         setHasStableIds(false);
         this.mData = data;

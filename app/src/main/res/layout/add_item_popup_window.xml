@@ -2,34 +2,131 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cardview_dark_background"
+    android:background="@color/cardview_light_background"
     android:orientation="vertical"
-    android:weightSum="10">
+    android:weightSum="20">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+
+        <TextView
+            android:paddingEnd="5sp"
+            android:paddingStart="5sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/name"
+            android:layout_weight="0.5"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:paddingEnd="5sp"
+            android:paddingStart="5sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/brand_name"
+            android:layout_weight="0.5"
+            android:textSize="20sp" />
+
+
+    </LinearLayout>
+
+
 
     <androidx.recyclerview.widget.RecyclerView
+        android:paddingEnd="5sp"
+        android:paddingStart="5sp"
         android:id="@+id/foodItemList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="#FFFFFF"
-        android:layout_weight="9"/>
+        android:layout_weight="10"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/search"
+            android:paddingEnd="5sp"
+            android:paddingStart="5sp"
+            android:textSize="15sp"
+            android:gravity="center_vertical|start"
+
+            />
+
+        <EditText
+            android:inputType="textFilter"
+            android:maxLines="1"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:textSize="20sp"
+            android:hint="@string/search_term"
+            android:importantForAutofill="yes" />
+
+
+    </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:layout_weight="1"
-        android:background="#FFFFFF"
-        android:weightSum="2"
+        android:layout_weight="2"
+
         >
-        <Button
-            android:id="@+id/addItemToMealButton"
+
+        <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:onClick="addItemToMealOnClick"
-            android:text="@string/add_food_item_to_meal"
-            android:textAlignment="center"
-            android:layout_weight="1"/>
+            android:text="@string/serving_size"
+            android:paddingEnd="5sp"
+            android:paddingStart="5sp"
+            android:textSize="20sp"
+            android:gravity="center_vertical|start"
+            android:layout_gravity="start"
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:id="@+id/servingSizeText"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:paddingEnd="5sp"
+            android:paddingStart="5sp"
+            android:textSize="15sp"
+            android:gravity="center_vertical|center"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            />
+
+        <Button
+            android:id="@+id/addServingButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@string/add_a_serving"
+            android:padding="5sp"
+            android:layout_gravity="end"
+            android:layout_weight="1"
+            android:onClick="addServingOnclick"
+            />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="2"
+        android:background="#FFFFFF"
+        >
 
         <EditText
             android:id="@+id/foodItemWeightEditText"
@@ -37,8 +134,19 @@
             android:layout_height="match_parent"
             android:inputType="number"
             android:autofillHints="@string/grams"
-            android:layout_weight="1"
+            android:layout_weight="0.5"
             />
+
+        <Button
+            android:id="@+id/addItemToMealButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:onClick="addItemToMealOnClick"
+            android:text="@string/add_food_item_to_meal"
+            android:textAlignment="center"
+            android:layout_weight="0.5"/>
+
+
 
     </LinearLayout>
 

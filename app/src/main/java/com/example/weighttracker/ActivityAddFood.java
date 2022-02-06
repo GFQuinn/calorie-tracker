@@ -3,27 +3,29 @@ package com.example.weighttracker;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
+
 import android.os.Bundle;
-import android.text.TextUtils;
+
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
-public class AddFood extends AppCompatActivity {
+
+public class ActivityAddFood extends AppCompatActivity {
     RadioButton gramsRadioButton;
     RadioButton mlRadioButton;
     EditText nameEditText;
     EditText brandEditText;
     EditText kiloJouleEditNumber;
     EditText carbsEditNumber;
+    EditText sugarsEditNumber;
     EditText proteinEditNumber;
     EditText fatEditNumber;
     EditText servingSizeEditNumber;
+    EditText servingLabelEditText;
     RadioGroup unitsRadioGroup;
-    DataBaseHelper dbHelper;
+    HelperDataBase dbHelper;
 
     //data entered by user is per 100g and needs to be converted to per 1 gram values
     int convertToGramFactor = 100;
@@ -32,17 +34,19 @@ public class AddFood extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_food);
-        gramsRadioButton = (RadioButton) findViewById(R.id.gramsRadioButton);
-        mlRadioButton = (RadioButton) findViewById(R.id.mlRadioButton);
-        nameEditText = (EditText) findViewById(R.id.nameText);
-        brandEditText = (EditText) findViewById(R.id.brandText);
-        kiloJouleEditNumber = (EditText) findViewById(R.id.kjEditText);
-        carbsEditNumber = (EditText) findViewById(R.id.carbsEditText);
-        proteinEditNumber = (EditText) findViewById(R.id.proteinEditText);
-        fatEditNumber = (EditText) findViewById(R.id.fatEditText);
-        servingSizeEditNumber = (EditText) findViewById(R.id.servingSizeEditNumber);
-        unitsRadioGroup = (RadioGroup) findViewById(R.id.unitsRadioGroup);
-        dbHelper = DataBaseHelper.getInstance(this);
+        gramsRadioButton = findViewById(R.id.gramsRadioButton);
+        mlRadioButton = findViewById(R.id.mlRadioButton);
+        nameEditText = findViewById(R.id.nameText);
+        brandEditText = findViewById(R.id.brandText);
+        kiloJouleEditNumber = findViewById(R.id.kjEditText);
+        carbsEditNumber = findViewById(R.id.carbsEditText);
+        sugarsEditNumber = findViewById(R.id.sugarEditText);
+        proteinEditNumber = findViewById(R.id.proteinEditText);
+        fatEditNumber = findViewById(R.id.fatEditText);
+        servingSizeEditNumber = findViewById(R.id.servingSizeEditNumber);
+        servingLabelEditText = findViewById(R.id.servingLabelEditText);
+        unitsRadioGroup = findViewById(R.id.unitsRadioGroup);
+        dbHelper = HelperDataBase.getInstance(this);
 
     }
 
@@ -52,7 +56,7 @@ public class AddFood extends AppCompatActivity {
         mlRadioButton.setChecked(false);
     }
 
-    public void millilitesRadioOnClick(View view) {
+    public void millilitresRadioOnClick(View view) {
         mlRadioButton.setChecked(true);
         gramsRadioButton.setChecked(false);
     }
@@ -63,45 +67,51 @@ public class AddFood extends AppCompatActivity {
         //get per 100 gram/milliLitre value from editTexts and convert to per grams value for database entry
         String kiloJoulePerGramValueString = kiloJouleEditNumber.getText().toString();
         String carbsPerGramValueString = carbsEditNumber.getText().toString();
+        String sugarsPerGramValueString = sugarsEditNumber.getText().toString();
         String proteinPerGramValueString = proteinEditNumber.getText().toString();
         String fatPerGramValueString = fatEditNumber.getText().toString();
         String servingSizeString = servingSizeEditNumber.getText().toString();
+        String servingLabelString = servingLabelEditText.getText().toString();
 
-       if(helper.isAnyStringNull(foodItemName, brandName, kiloJoulePerGramValueString, carbsPerGramValueString, proteinPerGramValueString, fatPerGramValueString, servingSizeString))
+
+       if(HelperMisc.isAnyStringNull(foodItemName, brandName, kiloJoulePerGramValueString, carbsPerGramValueString, sugarsPerGramValueString, proteinPerGramValueString, fatPerGramValueString, servingSizeString))
         {
             showErrorMessage();
        }
         else
         {
-            float kiloJoulePerGramValue = Float.valueOf(kiloJoulePerGramValueString) / convertToGramFactor;
-            float carbsPerGramValue = Float.valueOf(carbsPerGramValueString) / convertToGramFactor;
-            float proteinPerGramValue = Float.valueOf(proteinPerGramValueString) / convertToGramFactor;
-            float fatPerGramValue = Float.valueOf(fatPerGramValueString) / convertToGramFactor;
-            float servingSize = Float.valueOf(servingSizeString) / convertToGramFactor;
+            float kiloJoulePerGramValue = Float.parseFloat(kiloJoulePerGramValueString) / convertToGramFactor;
+            float carbsPerGramValue = Float.parseFloat(carbsPerGramValueString) / convertToGramFactor;
+            float sugarsPerGramValue =  Float.parseFloat(sugarsPerGramValueString) / convertToGramFactor;
+            float proteinPerGramValue = Float.parseFloat(proteinPerGramValueString) / convertToGramFactor;
+            float fatPerGramValue = Float.parseFloat(fatPerGramValueString) / convertToGramFactor;
+            float servingSize = Float.parseFloat(servingSizeString);
+
             addFoodItemToDatabase(foodItemName, brandName, kiloJoulePerGramValue,
-                    carbsPerGramValue, proteinPerGramValue, fatPerGramValue, servingSize);
+                    carbsPerGramValue, sugarsPerGramValue, proteinPerGramValue, fatPerGramValue, servingSize, servingLabelString);
         }
 
 
     }
 
-    private void addFoodItemToDatabase(String foodItemName, String brandName, float kiloJoulePerGramValue, float carbsPerGramValue,
-                                       float proteinPerGramValue, float fatPerGramValue, float servingSize) {
+    private void addFoodItemToDatabase(String foodItemName, String brandName, float kiloJoulePerGramValue, float carbsPerGramValue, float sugarsPerGramValue,
+                                       float proteinPerGramValue, float fatPerGramValue, float servingSize, String servingLabelString) {
         //sets the units value depending on selected radio button
         int checkedRadioButtonId = unitsRadioGroup.getCheckedRadioButtonId();
-        String unitsString = "";
+        String unitsString;
 
-        switch (checkedRadioButtonId) {
-            case R.id.gramsRadioButton:
-                unitsString = "grams";
-                break;
-            case R.id.mlRadioButton:
-                unitsString = "millilitres";
-                break;
+        if(checkedRadioButtonId == R.id.gramsRadioButton)
+        {
+            unitsString = "grams";
         }
-        dbHelper.insertFoodItem(foodItemName, brandName, unitsString, kiloJoulePerGramValue, carbsPerGramValue,
-                proteinPerGramValue, fatPerGramValue, servingSize);
+        else
+        {
+            unitsString = "millilitres";
+        }
 
+
+        dbHelper.insertFoodItem(foodItemName, brandName, unitsString, kiloJoulePerGramValue, carbsPerGramValue, sugarsPerGramValue,
+                proteinPerGramValue, fatPerGramValue, servingSize, servingLabelString);
 
         nameEditText.getText().clear();
         brandEditText.getText().clear();
@@ -109,9 +119,11 @@ public class AddFood extends AppCompatActivity {
         mlRadioButton.setChecked(false);
         kiloJouleEditNumber.getText().clear();
         carbsEditNumber.getText().clear();
+        sugarsEditNumber.getText().clear();
         proteinEditNumber.getText().clear();
         fatEditNumber.getText().clear();
         servingSizeEditNumber.getText().clear();
+        servingLabelEditText.getText().clear();
 
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle("Success");

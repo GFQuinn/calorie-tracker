@@ -1,11 +1,11 @@
 package com.example.weighttracker;
 
-public class Ingredient  {
+public class ClassIngredient {
 
     private int amount;
-    private FoodType foodType;
+    private ClassFoodType foodType;
 
-    Ingredient(int amount, FoodType type)
+    ClassIngredient(int amount, ClassFoodType type)
     {
         foodType = type;
         this.amount = amount;
@@ -20,9 +20,14 @@ public class Ingredient  {
         return foodType.getFoodName();
     }
 
+    public String getUnits(){return foodType.getUnits();}
+
     public int getEnergy()
     {
         return amount * foodType.getCalories();
     }
 
+    public String getBrandName() {
+        return foodType.getBrandName();
+    }
 }
