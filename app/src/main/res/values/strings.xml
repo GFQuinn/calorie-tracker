@@ -48,4 +48,6 @@
     <string name="wednesday_energy_goal">Wednesday Energy Goal</string>
     <string name="tuesday_energy_goal">Tuesday Energy Goal</string>
     <string name="monday_energy_goal">Monday Energy Goal</string>
+    <string name="recipe_name">Recipe Name:</string>
+    <string name="ingredients">Ingredients</string>
 </resources>

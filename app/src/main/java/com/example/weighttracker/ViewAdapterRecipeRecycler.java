@@ -97,4 +97,9 @@ public class ViewAdapterRecipeRecycler extends  RecyclerView.Adapter<ViewAdapter
         void onItemClick(View view, int position);
 
     }
+
+    public ClassRecipe getRecipe()
+    {
+        return mData;
+    }
 }

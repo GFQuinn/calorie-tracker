@@ -267,42 +267,6 @@ public class HelperDataBase extends SQLiteOpenHelper {
 
     }
 
-
-    public void insertSavedRecipe(ClassRecipe recipe, String recipeName) {
-        SQLiteDatabase database = this.getWritableDatabase();
-        //insert saved recipe components loop
-        for (int i = 0; i < recipe.size(); i++) {
-            ClassIngredient ingredient = recipe.getIngredientDataAtIndex(i);
-            ContentValues componentValues = new ContentValues();
-            componentValues.put(FOOD_TYPE_NAME, ingredient.getFoodName());
-            componentValues.put(FOOD_TYPE_BRAND, ingredient.getBrandName());
-            componentValues.put(SAVED_RECIPE_NAME, recipeName);
-            componentValues.put(PORTION_SIZE, ingredient.getAmount());
-            database.insertOrThrow(SAVED_RECIPE_TABLE, null, componentValues);
-        }
-        ContentValues savedRecipeValues = new ContentValues();
-        savedRecipeValues.put(SAVED_RECIPE_NAME, recipeName);
-        database.insertOrThrow(SAVED_RECIPE_TABLE, null, savedRecipeValues);
-    }
-
-
-    public void insertMeal(ClassRecipe recipe, String recipeName) {
-        SQLiteDatabase database = this.getWritableDatabase();
-        //insert recipe components loop
-        for (int i = 0; i < recipe.size(); i++) {
-            ClassIngredient ingredient = recipe.getIngredientDataAtIndex(i);
-            ContentValues componentValues = new ContentValues();
-            componentValues.put(FOOD_TYPE_NAME, ingredient.getFoodName());
-            componentValues.put(FOOD_TYPE_BRAND, ingredient.getBrandName());
-            componentValues.put(PORTION_SIZE, ingredient.getAmount());
-            database.insertOrThrow(RECIPE_TABLE, null, componentValues);
-        }
-        ContentValues recipeValues = new ContentValues();
-        recipeValues.put(RECIPE_NAME, recipeName);
-        database.insertOrThrow(RECIPE_TABLE, null, recipeValues);
-    }
-
-
     public ClassFoodTypes getAllFoodItems() {
         SQLiteDatabase database = this.getWritableDatabase();
         ClassFoodTypes foodItems = new ClassFoodTypes();
@@ -323,12 +287,43 @@ public class HelperDataBase extends SQLiteOpenHelper {
         return foodItems;
     }
 
-    public boolean editUserSettings()
+    public ClassUserSettings getUserSettings()
     {
-        return true;
+        return null;
     }
 
+    public void insertMeal(ClassRecipe recipe, String recipeName) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        //insert recipe components loop
+        for (int i = 0; i < recipe.size(); i++) {
+            ClassIngredient ingredient = recipe.getIngredientDataAtIndex(i);
+            ContentValues componentValues = new ContentValues();
+            componentValues.put(FOOD_TYPE_NAME, ingredient.getFoodName());
+            componentValues.put(FOOD_TYPE_BRAND, ingredient.getBrandName());
+            componentValues.put(PORTION_SIZE, ingredient.getAmount());
+            database.insertOrThrow(RECIPE_TABLE, null, componentValues);
+        }
+        ContentValues recipeValues = new ContentValues();
+        recipeValues.put(RECIPE_NAME, recipeName);
+        database.insertOrThrow(RECIPE_TABLE, null, recipeValues);
+    }
 
+    public void insertSavedRecipe(ClassRecipe recipe, String recipeName) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        //insert saved recipe components loop
+        for (int i = 0; i < recipe.size(); i++) {
+            ClassIngredient ingredient = recipe.getIngredientDataAtIndex(i);
+            ContentValues componentValues = new ContentValues();
+            componentValues.put(FOOD_TYPE_NAME, ingredient.getFoodName());
+            componentValues.put(FOOD_TYPE_BRAND, ingredient.getBrandName());
+            componentValues.put(SAVED_RECIPE_NAME, recipeName);
+            componentValues.put(PORTION_SIZE, ingredient.getAmount());
+            database.insertOrThrow(SAVED_RECIPE_TABLE, null, componentValues);
+        }
+        ContentValues savedRecipeValues = new ContentValues();
+        savedRecipeValues.put(SAVED_RECIPE_NAME, recipeName);
+        database.insertOrThrow(SAVED_RECIPE_TABLE, null, savedRecipeValues);
+    }
 
     public void deleteDatabase(Context context) {
         context.deleteDatabase(DATABASE_NAME);
